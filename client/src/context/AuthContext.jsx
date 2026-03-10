@@ -66,7 +66,9 @@ export const AuthProvider = ({ children })=>{
         setOnlineUsers([]);
         axios.defaults.headers.common["token"] = null;
         toast.success("Logged out successfully");
-        socket.disconnect();
+        if (socket) {
+            socket.disconnect();
+        }
     }
 
 
@@ -101,31 +103,45 @@ export const AuthProvider = ({ children })=>{
   // connect to socket function to handle socket connection and online users updates
   const connectSocket = (userData)=>{
     if(!userData) return;
-    
+
     // Disconnect old socket if it exists
     if (socket) {
         socket.disconnect();
     }
 
     console.log("Connecting socket with userData._id:", userData._id);
-    const newSocket = io(backendUrl, {
-        query: {
-            userId: userData._id?.toString?.() || userData._id,
-        }
-    });
-    
-    newSocket.on("connect", () => {
-        console.log("Socket connected");
-        setupOnlineUsersListener(newSocket);
-    });
 
-    newSocket.on("reconnect", () => {
-        console.log("Socket reconnected");
-        setupOnlineUsersListener(newSocket);
-    });
+    try {
+        const newSocket = io(backendUrl, {
+            query: {
+                userId: userData._id?.toString?.() || userData._id,
+            },
+            timeout: 5000, // 5 second timeout
+            reconnectionAttempts: 3
+        });
 
-    newSocket.connect();
-    setSocket(newSocket);
+        newSocket.on("connect", () => {
+            console.log("Socket connected");
+            setupOnlineUsersListener(newSocket);
+        });
+
+        newSocket.on("reconnect", () => {
+            console.log("Socket reconnected");
+            setupOnlineUsersListener(newSocket);
+        });
+
+        newSocket.on("connect_error", (error) => {
+            console.log("Socket connection failed:", error.message);
+            // Set empty online users list if Socket.IO fails
+            setOnlineUsers([]);
+        });
+
+        newSocket.connect();
+        setSocket(newSocket);
+    } catch (error) {
+        console.log("Socket.IO not available, continuing without real-time features");
+        setOnlineUsers([]);
+    }
 }
 
 useEffect(()=>{
