@@ -114,6 +114,8 @@
 
 3. **Environment Setup**
 
+   ⚠️ **SECURITY WARNING**: Never commit `.env` files to version control!
+
    Create `.env` files in both `server` and `client` directories:
 
    **Server (.env)**
@@ -130,6 +132,11 @@
    ```env
    VITE_BACKEND_URL=http://localhost:5000
    ```
+
+   <div align="center">
+     <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Warning.png" width="30" height="30" alt="Warning" />
+     <strong>Important: Add .env files to .gitignore before committing!</strong>
+   </div>
 
 4. **Start the application**
    ```bash
