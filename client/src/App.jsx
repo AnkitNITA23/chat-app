@@ -12,7 +12,7 @@ const App = () => {
     return <div className="min-h-screen flex items-center justify-center bg-[url('./src/assets/bgImage.svg')] bg-contain"><p className="text-white text-xl">Loading...</p></div>
   }
   return (
-    <div className="bg-[url('./src/assets/bgImage.svg')] bg-contain">
+    <div className="bg-[url('/bgImage.svg')] bg-contain">
       <Toaster />
       <Routes>
         <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />}/>
