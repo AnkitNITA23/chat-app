@@ -1,5 +1,6 @@
 import express from "express";
-import { checkAuth, login, signup, updateProfile } from "../controllers/usercontroller.js";
+// fix case-sensitive import for Linux-based deployment (Vercel uses Linux)
+import { checkAuth, login, signup, updateProfile } from "../controllers/userController.js";
 import { protectRoute } from "../middleware/auth.js";
 
 const userRouter = express.Router();
