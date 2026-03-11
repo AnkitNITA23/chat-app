@@ -300,5 +300,4 @@ This project is licensed under the ISC License - see the [LICENSE](LICENSE) file
   <p>Connect with friends and colleagues in real-time</p>
 
   <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Party Popper.png" width="50" height="50" alt="Party" />
-</div></content>
-<parameter name="filePath">c:\Users\Ankit Kumar\OneDrive\Desktop\chat-app\README.md
+</div></content
