@@ -3,8 +3,8 @@ import User from '../models/User.js';
 import cloudinary from '../lib/cloudinary.js';
 
 // Socket.IO imports - will be null in serverless environments
-let io = null;
-let userSocketMap = {};
+export let io = null;
+export let userSocketMap = {};
 
 export const getUsersForSidebar = async (req, res) => {
     try {
